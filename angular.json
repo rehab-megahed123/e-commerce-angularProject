@@ -27,6 +27,11 @@
               }
             ],
             "styles": [
+              
+              "node_modules/primeicons/primeicons.css",
+              "node_modules/primeicons/primeicons.css",
+              "node_modules/primeflex/primeflex.css",
+              "node_modules/ngx-spinner/animations/line-scale.css",
               "src/styles.css"
             ],
             "scripts": []
