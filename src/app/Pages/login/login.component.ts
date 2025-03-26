@@ -23,6 +23,7 @@ import { ToastModule } from 'primeng/toast';
 import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
 import { Router } from '@angular/router';
 import { AutoFocusModule } from 'primeng/autofocus';
+import { UserDataService } from '../../core/service/user-data.service';
 @Component({
   selector: 'app-login',
   imports: [
@@ -52,7 +53,8 @@ export class LoginComponent {
     private _authService: AuthService,
     private _messageService: MessageService,
     private _ngxSpinnerService: NgxSpinnerService,
-    private _router: Router
+    private _router: Router,
+    private _userData:UserDataService
   ) {
     this.initFormControls();
     this.initFormGroupe();
@@ -108,6 +110,8 @@ export class LoginComponent {
         if (response._id) {
           this.show('success', 'success', 'SuccessLogin');
           localStorage.setItem('token', response._id);
+          this._userData.userName.next(response.name);
+          localStorage.setItem('username', response.name);
         }
         this._ngxSpinnerService.hide();
         this._router.navigate(['home']);

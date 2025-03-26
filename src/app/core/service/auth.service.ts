@@ -20,4 +20,8 @@ export class AuthService {
   authorized(): boolean {
     return localStorage.getItem('token') != null;
   }
+
+  logout():Observable<any>{
+    return this._httpClient.post(`${baseUrl}/api/users/logout`,{});
+  }
 }

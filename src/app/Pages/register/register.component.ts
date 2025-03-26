@@ -23,6 +23,7 @@ import { ToastModule } from 'primeng/toast';
 import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
 import { Router } from '@angular/router';
 import { AutoFocusModule } from 'primeng/autofocus';
+import { UserDataService } from '../../core/service/user-data.service';
 @Component({
   selector: 'app-register',
   imports: [
@@ -54,7 +55,8 @@ export class RegisterComponent {
     private _authService: AuthService,
     private _messageService: MessageService,
     private _ngxSpinnerService: NgxSpinnerService,
-    private _router: Router
+    private _router: Router,
+    private _userData:UserDataService
   ) {
     this.initFormControls();
     this.initFormGroupe();
@@ -127,7 +129,9 @@ export class RegisterComponent {
         this._authService.login({ email, password }).subscribe({
           next: (response) => {
             localStorage.setItem('token', response._id);
-            this._router.navigate(['user']);
+            this._router.navigate(['home']);
+            this._userData.userName.next(response.name);
+            localStorage.setItem('username', response.name);
           },
         });
       },

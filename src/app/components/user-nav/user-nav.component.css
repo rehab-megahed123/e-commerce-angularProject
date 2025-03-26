@@ -1,0 +1,29 @@
+
+.badge{
+  background-color:#ffa300 ;
+}
+.user-name {
+  position: relative;
+  padding: 10px;
+  border-radius: 7px;
+}
+
+.user-name::before {
+  content: "";
+  position: absolute;
+  bottom: -27px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 15px;
+  border-style: solid;
+  border-color: #ffa300 transparent transparent transparent;
+}
+
+.logout{
+  bottom: 0;
+  transform: translate(-50%,calc(100% + 15px));
+  border-radius:7px ;
+
+}
+
+

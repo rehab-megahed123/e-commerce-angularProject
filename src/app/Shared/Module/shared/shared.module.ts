@@ -7,6 +7,7 @@ import { InputGroupModule } from 'primeng/inputgroup';
 import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
 import { InputTextModule } from 'primeng/inputtext';
 import { ToastModule } from 'primeng/toast';
+import { CardComponent } from '../../card/card/card.component';
 
 @NgModule({
   declarations: [],
@@ -19,6 +20,7 @@ import { ToastModule } from 'primeng/toast';
     InputGroupAddonModule,
     InputTextModule,
     ToastModule,
+    CardComponent
   ],
   exports: [
     NgxSpinnerModule,

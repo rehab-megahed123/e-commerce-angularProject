@@ -7,52 +7,63 @@ import { AvatarModule } from 'primeng/avatar';
 import { InputTextModule } from 'primeng/inputtext';
 import { CommonModule } from '@angular/common';
 import { Ripple } from 'primeng/ripple';
-import { RouterLink } from '@angular/router';
-
+import { Router, RouterLink, RouterModule } from '@angular/router';
+import { ViewEncapsulation } from '@angular/core';
+import { UserDataService } from '../../core/service/user-data.service';
+import { AuthService } from '../../core/service/auth.service';
 @Component({
   selector: 'app-user-nav',
-  imports:  [Menubar, BadgeModule, AvatarModule, InputTextModule, Ripple, CommonModule,RouterLink],
+  imports:  [Menubar, BadgeModule, AvatarModule, InputTextModule, Ripple, CommonModule,RouterLink,RouterModule],
   templateUrl: './user-nav.component.html',
   styleUrl: './user-nav.component.css',
+  encapsulation: ViewEncapsulation.None,
   standalone:true
 })
 export class UserNavComponent {
-  
+constructor(private _userData:UserDataService,private _auth:AuthService,private router:Router){}
 
   items: MenuItem[] | undefined;
+  logOut:boolean = false;
+  username:string=''
+  cartCount:number=0;
 
   ngOnInit() {
-      this.items = [
-          {
-              label: 'Home',
-              icon: 'pi pi-home',
-          },
-          {
-              label: 'Projects',
-              icon: 'pi pi-search',
-              badge: '3',
-              items: [
-                  {
-                      label: 'Core',
-                      icon: 'pi pi-bolt',
-                      shortcut: '⌘+S',
-                  },
-                  {
-                      label: 'Blocks',
-                      icon: 'pi pi-server',
-                      shortcut: '⌘+B',
-                  },
-                  {
-                      separator: true,
-                  },
-                  {
-                      label: 'UI Kit',
-                      icon: 'pi pi-pencil',
-                      shortcut: '⌘+U',
-                  },
-              ],
-          },
-      ];
+    this.getUserName()
+    this.getUserCartCount()
+    this.items = [
+      {
+        label: 'Home',
+        icon: 'pi pi-home',
+        routerLink: '/home'
+      },
+      {
+        label: 'Products',
+        icon: 'pi pi-sparkles',
+        routerLink: '/products'
+      },
+      {
+        label: 'Categories',
+        icon: 'pi pi-th-large',
+        routerLink: '/categories'
+      },
+    ];
   }
+getUserName():void{
+  this._userData.userName.subscribe((next)=>this.username=next);
+}
 
+getUserCartCount():void{
+  const id = localStorage.getItem('token')?? ''
+this._userData.getCartCount(id).subscribe((next)=>this.cartCount= next.cart.length);
+}
+
+logout():void{
+this._auth.logout().subscribe((next)=>{
+
+localStorage.removeItem('token');
+localStorage.removeItem('username');
+this.router.navigate(['login']);
+
+})
+}
 }
