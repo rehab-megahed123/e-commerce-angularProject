@@ -1,0 +1,25 @@
+export interface IRegister {
+  name: string;
+  email: string;
+  password: string;
+  rePassword: string;
+}
+
+export interface ILogin {
+  email: string;
+  password: string;
+}
+
+export interface IProducts {
+  "id": 1,
+  "title": string;
+  "image": string;
+  "price": number;
+  "description": string;
+  "brand": string;
+  "model": string;
+  "color": string;
+  "category": string;
+  "discount":number;
+  "popular": boolean;
+}
