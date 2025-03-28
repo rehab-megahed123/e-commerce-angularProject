@@ -24,6 +24,7 @@ import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
 import { Router } from '@angular/router';
 import { AutoFocusModule } from 'primeng/autofocus';
 import { UserDataService } from '../../core/service/user-data.service';
+import { NotifecationsService } from '../../core/service/notifecations.service';
 @Component({
   selector: 'app-login',
   imports: [
@@ -51,8 +52,7 @@ export class LoginComponent {
 
   constructor(
     private _authService: AuthService,
-    private _messageService: MessageService,
-    private _ngxSpinnerService: NgxSpinnerService,
+    private _notifecationsService: NotifecationsService,
     private _router: Router,
     private _userData:UserDataService
   ) {
@@ -95,30 +95,21 @@ export class LoginComponent {
       );
     }
   }
-  show(sevirity: string, summary: string, detail: string) {
-    this._messageService.add({
-      severity: sevirity,
-      summary: summary,
-      detail: detail,
-    });
-  }
+
 
   siginIn(data: ILogin): void {
-    this._ngxSpinnerService.show();
     this._authService.login(data).subscribe({
       next: (response) => {
         if (response._id) {
-          this.show('success', 'success', 'SuccessLogin');
+          this._notifecationsService.showSuccess('success', 'SuccessLogin');
           localStorage.setItem('token', response._id);
           this._userData.userName.next(response.name);
           localStorage.setItem('username', response.name);
         }
-        this._ngxSpinnerService.hide();
         this._router.navigate(['home']);
       },
       error: (err) => {
-        this.show('error', 'Error', err.error.error);
-        this._ngxSpinnerService.hide();
+        this._notifecationsService.showError( 'Error',err.error.error);
 
         // this._notifecationsService.showError('Error', err.error.error);
       },

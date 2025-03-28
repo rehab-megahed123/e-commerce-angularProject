@@ -19,7 +19,6 @@ import { CardComponent } from '../../card/card/card.component';
     InputGroupModule,
     InputGroupAddonModule,
     InputTextModule,
-    ToastModule,
     CardComponent
   ],
   exports: [
@@ -30,8 +29,7 @@ import { CardComponent } from '../../card/card/card.component';
     InputGroupModule,
     InputGroupAddonModule,
     InputTextModule,
-    ToastModule,
+
   ],
-  providers: [MessagesModule],
 })
 export class SharedModule {}

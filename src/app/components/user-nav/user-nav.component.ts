@@ -11,6 +11,7 @@ import { Router, RouterLink, RouterModule } from '@angular/router';
 import { ViewEncapsulation } from '@angular/core';
 import { UserDataService } from '../../core/service/user-data.service';
 import { AuthService } from '../../core/service/auth.service';
+import { CartService } from '../../core/service/cart.service';
 @Component({
   selector: 'app-user-nav',
   imports:  [Menubar, BadgeModule, AvatarModule, InputTextModule, Ripple, CommonModule,RouterLink,RouterModule],
@@ -20,7 +21,7 @@ import { AuthService } from '../../core/service/auth.service';
   standalone:true
 })
 export class UserNavComponent {
-constructor(private _userData:UserDataService,private _auth:AuthService,private router:Router){}
+constructor(private _userData:UserDataService,private _cart:CartService,private _auth:AuthService,private router:Router){}
 
   items: MenuItem[] | undefined;
   logOut:boolean = false;
@@ -47,6 +48,9 @@ constructor(private _userData:UserDataService,private _auth:AuthService,private 
         routerLink: '/categories'
       },
     ];
+this._cart.countOfCart.subscribe((next)=>{
+this.cartCount=next;
+})
   }
 getUserName():void{
   this._userData.userName.subscribe((next)=>this.username=next);
@@ -54,7 +58,7 @@ getUserName():void{
 
 getUserCartCount():void{
   const id = localStorage.getItem('token')?? ''
-this._userData.getCartCount(id).subscribe((next)=>this.cartCount= next.cart.length);
+this._cart.getCartCount(id).subscribe((next)=>this.cartCount= next.cart.length);
 }
 
 logout():void{

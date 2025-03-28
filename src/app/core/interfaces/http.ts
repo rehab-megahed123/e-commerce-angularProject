@@ -11,7 +11,7 @@ export interface ILogin {
 }
 
 export interface IProducts {
-  "id": 1,
+  "_id": string,
   "title": string;
   "image": string;
   "price": number;
@@ -22,4 +22,5 @@ export interface IProducts {
   "category": string;
   "discount":number;
   "popular": boolean;
+"isAddedToCart":boolean;
 }

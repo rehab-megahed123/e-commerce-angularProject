@@ -24,6 +24,7 @@ import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
 import { Router } from '@angular/router';
 import { AutoFocusModule } from 'primeng/autofocus';
 import { UserDataService } from '../../core/service/user-data.service';
+import { NotifecationsService } from '../../core/service/notifecations.service';
 @Component({
   selector: 'app-register',
   imports: [
@@ -53,8 +54,7 @@ export class RegisterComponent {
 
   constructor(
     private _authService: AuthService,
-    private _messageService: MessageService,
-    private _ngxSpinnerService: NgxSpinnerService,
+    private _notifecationsService: NotifecationsService,
     private _router: Router,
     private _userData:UserDataService
   ) {
@@ -109,22 +109,14 @@ export class RegisterComponent {
       );
     }
   }
-  show(sevirity: string, summary: string, detail: string) {
-    this._messageService.add({
-      severity: sevirity,
-      summary: summary,
-      detail: detail,
-    });
-  }
+
 
   siginUp(data: IRegister): void {
-    this._ngxSpinnerService.show();
     this._authService.register(data).subscribe({
       next: (response) => {
         if (response._id) {
-          this.show('success', 'success', 'SuccessRegister');
+          this._notifecationsService.showSuccess( 'success', 'SuccessRegister');
         }
-        this._ngxSpinnerService.hide();
         const { email, password } = data;
         this._authService.login({ email, password }).subscribe({
           next: (response) => {
@@ -136,8 +128,7 @@ export class RegisterComponent {
         });
       },
       error: (err) => {
-        this.show('error', 'Error', err.error.error);
-        this._ngxSpinnerService.hide();
+        this._notifecationsService.showError( 'Error', err.error.error);
 
         // this._notifecationsService.showError('Error', err.error.error);
       },
