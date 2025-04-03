@@ -1,0 +1,24 @@
+::ng-deep .p-dataview-emptymessage {
+    color: white;
+    background-color: #f97316;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+  }
+  /* Add this to your styles.css or in the component styles */
+/* .p-paginator {
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.p-paginator .p-paginator-page {
+  font-size: 14px;
+  padding: 8px 12px;
+}
+
+.p-paginator .p-paginator-prev,
+.p-paginator .p-paginator-next {
+  font-size: 16px;
+} */
+
+  

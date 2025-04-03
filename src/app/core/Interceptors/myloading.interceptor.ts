@@ -8,11 +8,5 @@ const spiner=inject(NgxSpinnerService)
 spiner.show()
   return next(req).pipe(finalize(()=>{
 spiner.hide()
-  }), tap((event)=>{
-if(event.type==HttpEventType.Response){
-if(event.status!==200){
-alert('Try Again Later')
-}
-}
   }))
 };

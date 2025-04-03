@@ -56,9 +56,9 @@ getUserName():void{
   this._userData.userName.subscribe((next)=>this.username=next);
 }
 
-getUserCartCount():void{
-  const id = localStorage.getItem('token')?? ''
-this._cart.getCartCount(id).subscribe((next)=>this.cartCount= next.cart.length);
+getUserCartCount(): void {
+  const id = localStorage.getItem('token') ?? '';
+  this._cart.countOfCart.subscribe((next) => (this.cartCount = next));
 }
 
 logout():void{

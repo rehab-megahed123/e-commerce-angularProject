@@ -43,22 +43,15 @@ this.images=[
 ];
 this.getAllProducts();
 }
-
-getAllProducts():void{
-  const storedcart=localStorage.getItem('cartState');
-  const cartState=storedcart?JSON.parse(storedcart):{};
-  this._productsService.allProducts().subscribe((response:IProducts[])=>{
-    this.smallProducts=response.slice(0,4);
-    this.popularProducts=response.map((product)=>{
-return{
-... product,
-isAddedToCart:cartState[product._id]||false
-}
+getAllProducts(): void {
+  this._productsService.allProducts().subscribe((response: any) => {
+    this.smallProducts = response.products.slice(0, 4);
+    this.popularProducts = response.products.map((product: IProducts) => {
+      return {
+        ...product,
+        isAddedToCart: this._cartServive.isAddedToCart(product) || false,
+      };
     });
-console.log(this.popularProducts)
   });
-
-
 }
-
 }

@@ -7,27 +7,23 @@ import { RouterLink } from '@angular/router';
 import { CartService } from '../../../core/service/cart.service';
 import { NotifecationsService } from '../../../core/service/notifecations.service';
 import { EmptyComponent } from '../../empty/empty.component';
+import { MessageModule } from 'primeng/message';
+
 @Component({
   selector: 'app-card',
-  imports: [NgClass,ButtonModule,RouterLink,EmptyComponent],
+  standalone: true,
+  imports: [NgClass, ButtonModule, RouterLink, MessageModule, EmptyComponent],
   templateUrl: './card.component.html',
-  styleUrl: './card.component.css'
+  styleUrl: './card.component.css',
 })
 export class CardComponent {
-@Input({required:true}) isSmallCard:boolean=false;
-isAddedToCart:boolean=false;
-@Input ({required:true}) Products!:IProducts[];
-@Input() searchKey:string=''
-constructor(private _cartService:CartService,private _notifecationsService:NotifecationsService){}
-addToCart(productId:string){
-  const userId=localStorage.getItem('token')??''
-  this._cartService.addToCart({userId,productId}).subscribe((next)=>{
-this._notifecationsService.showSuccess('success',next.message)
-this._cartService.countOfCart.next(next.cart.length)
-this.isAddedToCart=true;
-const storedcart=localStorage.getItem('cartState');
-const cartState=storedcart?JSON.parse(storedcart):{};
-cartState[productId]=true;
-localStorage.setItem('cartState',JSON.stringify(cartState));
-})}
+  constructor(private _cartService: CartService) {}
+  isAddedToCart: boolean = false;
+  @Input({ required: true }) isSmallCard: boolean = false;
+  @Input({ required: true }) Products!: IProducts[];
+  @Input() searchKey: string = '';
+
+  addToCart(product: IProducts) {
+    this._cartService.addToCart(product);
+  }
 }
