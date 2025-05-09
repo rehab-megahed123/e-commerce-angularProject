@@ -1,3 +1,33 @@
+## 📁 2. `Angular-Ecommerce-SPA/README.md`
+
+```markdown
+# 🛍️ Angular E-Commerce SPA
+
+A feature-rich Angular Single Page Application (SPA) built at ITI.
+
+🔗 [Project Repo](https://github.com/MarawanAbed/Angular-Ecommerce)
+
+---
+
+## 🛠 Tech Stack
+
+- Angular, TypeScript
+- RxJS, Reactive Forms
+- HTML5, CSS3
+- Route Guards, Interceptors
+
+---
+
+## ✨ Features
+
+- 🔐 Auth (Login/Register)
+- 🔐 Route Guards
+- 🛒 Cart with local storage
+- 📦 Product filtering
+- 🚀 API Integration
+
+
+
 # Ecommerce
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.4.
