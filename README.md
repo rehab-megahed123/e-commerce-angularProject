@@ -1,6 +1,4 @@
-## 📁 2. `Angular-Ecommerce-SPA/README.md`
 
-```markdown
 # 🛍️ Angular E-Commerce SPA
 
 A feature-rich Angular Single Page Application (SPA) built at ITI.
