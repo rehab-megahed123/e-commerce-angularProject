@@ -25,8 +25,7 @@ A feature-rich Angular Single Page Application (SPA) built at ITI.
 - 🚀 API Integration
 
 
-
-# Ecommerce
+```
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.4.
 
